@@ -68,9 +68,13 @@ class Button:
 
 
 class object:
-    def __init__(self,x,y,w,h,ax,ay,vx,vy,mass,):
+    def __init__(self,x,y,w,h,mass):
     
 
-    def apply_force:
+    def apply_force(fx,fy):
+        ax+=fx/mass
+        ay+=fy/mass
 
 
+class world :
+    
