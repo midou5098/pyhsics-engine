@@ -68,13 +68,30 @@ class Button:
 
 
 class object:
-    def __init__(self,x,y,w,h,mass):
-    
+    def __init__(self,x,y,w,h,mass,rest,fric,stat):
+        self.x=x
+        self.y=y
+        self.w=w
+        self.h=h
+        self.mass=mass
+        self.rest=rest
+        self.fric=fric
+        self.static=stat
+        self.ax=0
+        self.ay=0
+        self.vx=0
+        self.vy=0
+    def appforce(self,fx,fy):
+        self.ax=fx/self.mass
+        self.ay=fy/self.mass
+    def appimp(self,jx,jy):
+        self.vx=jx/self.mass
+        self.vy=jy/self.mass
+    def update(self,dt):
+        if(self.static):
+            return
+        self.vx+=dt*self.ax
+        self.vy+=dt*self.ay
+        self.ax=0
+        self.ay=0
 
-    def apply_force(fx,fy):
-        ax+=fx/mass
-        ay+=fy/mass
-
-
-class world :
-    
