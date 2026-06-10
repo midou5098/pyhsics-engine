@@ -11,7 +11,7 @@ class Button:
         self.text_color = text_color
         self.is_hovered = False
         self.clicked = False
-        
+
         # Load custom font (font.ttf in your folder)
         try:
             self.font = pygame.font.Font("font.ttf", 24)
@@ -19,23 +19,23 @@ class Button:
             # Fallback to default font if custom font not found
             self.font = pygame.font.Font(None, 24)
             print("Custom font not found, using default")
-    
+
     def handle_event(self, event):
         """Handle mouse events for the button"""
         if event.type == pygame.MOUSEMOTION:
             # Check if mouse is hovering
             self.is_hovered = self.rect.collidepoint(event.pos)
-            
+
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1 and self.is_hovered:  # Left click
                 self.clicked = True
                 return True
-                
+
         elif event.type == pygame.MOUSEBUTTONUP:
             self.clicked = False
-            
+
         return False
-    
+
     def draw(self, screen):
         """Draw the button on screen"""
         # Choose color based on state
@@ -45,23 +45,23 @@ class Button:
             current_color = self.hover_color  # Darker when hovered
         else:
             current_color = self.color
-        
+
         # Draw button background with rounded corners
         pygame.draw.rect(screen, current_color, self.rect, border_radius=8)
         pygame.draw.rect(screen, pygame.Color('black'), self.rect, 2, border_radius=8)
-        
+
         # Render text
         text_surface = self.font.render(self.text, True, self.text_color)
         text_rect = text_surface.get_rect(center=self.rect.center)
-        
+
         # Draw text
         screen.blit(text_surface, text_rect)
-    
+
     def set_position(self, x, y):
         """Move button to new position"""
         self.rect.x = x
         self.rect.y = y
-    
+
     def set_text(self, new_text):
         """Change button text"""
         self.text = new_text
@@ -82,11 +82,15 @@ class object:
         self.vx=0
         self.vy=0
     def appforce(self,fx,fy):
-        self.ax=fx/self.mass
-        self.ay=fy/self.mass
+        if self.static :
+            return
+        self.ax+=fx/self.mass
+        self.ay+=fy/self.mass
     def appimp(self,jx,jy):
-        self.vx=jx/self.mass
-        self.vy=jy/self.mass
+        if self.static:
+            return
+        self.vx+=jx/self.mass
+        self.vy+=jy/self.mass
     def update(self,dt):
         if(self.static):
             return
@@ -94,4 +98,24 @@ class object:
         self.vy+=dt*self.ay
         self.ax=0
         self.ay=0
+        self.x+=dt*self.vx
+        self.y+=dt*self.vy
+    def render(self,screen,color):
+        pygame.draw.rect(screen,(self.x,self.y),color,(self.w,self.h))
 
+
+class world:
+    def __init__(self,gravity,screen):
+        self.gravity=gravity
+        self.objects=list()
+        self.sc=screen
+    def addobj(self,obj):
+        self.objects.append(obj)
+    def update(self,dt):
+        for obj in self.objects:
+            obj.appforce(0,self.gravity*obj.mass)
+        for obj in self.objects:
+            obj.update(dt)
+    def render(self):
+        for obj in self.objects:
+            obj.render(self.sc)
