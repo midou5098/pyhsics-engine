@@ -105,10 +105,11 @@ class object:
 
 #            tbh i ll use the axis aligned bounding box(aabb) we ll upgrade later
 class world:
-    def __init__(self,gravity,screen):
+    def __init__(self,gravity,screen,rest):
         self.gravity=gravity
         self.objects=list()
         self.sc=screen
+        self.rest=rest
     def addobj(self,obj):
         self.objects.append(obj)
     def update(self,dt):
@@ -125,15 +126,42 @@ class world:
                 ox=min(obj_a.x+obj_a.w,obj_b.x+obj_b.w) - max(obj_a.x,obj_b.x)
                 oy=min(obj_a.y+obj_a.h,obj_b.y+obj_b.h)-max(obj_a.y,obj_b.y)
                 if ox>0 and oy>0:
-                    if obj_b.x+obj_b.w/2 > obj_a.x+obj_a.w/2 :
-                        nx=1
+                    if ox < oy:
+                        if obj_b.x+obj_b.w/2 > obj_a.x+obj_a.w/2 :
+                            nx=1
+                            ny=0
+                        else:
+                            nx=-1
+                            ny=0
                     else:
-                        nx=-1
+                        if obj_b.y+obj_b.h/2 > obj_a.y+obj_a.h/2 :
+                            nx=0
+                            ny=1
+                        else:
+                            nx=0
+                            ny=-1  
+
+                    
+                    
                 
-                    vel_n=rvx*nx+rvy*ny
+                vel_n=rvx*nx+rvy*ny
+                if vel_n<=0:
+                    j=-(1+min(obj_a.rest,obj_b.rest))*vel_n/((1/obj_a.mass)+(1/obj_b.mass))
+                    obj_a.appimp(-j*nx,-j*ny)
+                    obj_b.appimp(j*nx,j*ny)
 
 
 
     def render(self):
         for obj in self.objects:
             obj.render(self.sc)
+
+*
+if obj_b.x+obj_b.w/2 > obj_a.x+obj_a.w/2 :
+                        if ox < oy:
+                            ny = 0
+                            nx = 1
+                        else:
+                            nx = 0
+                            ny =-1
+                    elif obj_b.y+obj_b.h/2 > obj_a.y+obj_a.h/2 :
