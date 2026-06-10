@@ -103,7 +103,7 @@ class object:
     def render(self,screen,color):
         pygame.draw.rect(screen,(self.x,self.y),color,(self.w,self.h))
 
-
+#            tbh i ll use the axis aligned bounding box(aabb) we ll upgrade later
 class world:
     def __init__(self,gravity,screen):
         self.gravity=gravity
@@ -116,6 +116,24 @@ class world:
             obj.appforce(0,self.gravity*obj.mass)
         for obj in self.objects:
             obj.update(dt)
+        for a in range(self.objects.__len__()):
+            for b in range(a+1,self.objects.__len__()):
+                obj_a=self.objects[a]
+                obj_b=self.objects[b]
+                rvx=obj_b.vx-obj_a.vx
+                rvy=obj_b.vy-obj_a.vy
+                ox=min(obj_a.x+obj_a.w,obj_b.x+obj_b.w) - max(obj_a.x,obj_b.x)
+                oy=min(obj_a.y+obj_a.h,obj_b.y+obj_b.h)-max(obj_a.y,obj_b.y)
+                if ox>0 and oy>0:
+                    if obj_b.x+obj_b.w/2 > obj_a.x+obj_a.w/2 :
+                        nx=1
+                    else:
+                        nx=-1
+                
+                    vel_n=rvx*nx+rvy*ny
+
+
+
     def render(self):
         for obj in self.objects:
             obj.render(self.sc)
