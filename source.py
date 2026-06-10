@@ -81,6 +81,7 @@ class object:
         self.ay=0
         self.vx=0
         self.vy=0
+        self.black=pygame.Color('black')
     def appforce(self,fx,fy):
         if self.static :
             return
@@ -100,8 +101,8 @@ class object:
         self.ay=0
         self.x+=dt*self.vx
         self.y+=dt*self.vy
-    def render(self,screen,color):
-        pygame.draw.rect(screen,(self.x,self.y),color,(self.w,self.h))
+    def render(self,screen):
+        pygame.draw.rect(screen,self.black,(self.x,self.y,self.w,self.h))
 
 #            tbh i ll use the axis aligned bounding box(aabb) we ll upgrade later
 class world:
@@ -156,12 +157,3 @@ class world:
         for obj in self.objects:
             obj.render(self.sc)
 
-*
-if obj_b.x+obj_b.w/2 > obj_a.x+obj_a.w/2 :
-                        if ox < oy:
-                            ny = 0
-                            nx = 1
-                        else:
-                            nx = 0
-                            ny =-1
-                    elif obj_b.y+obj_b.h/2 > obj_a.y+obj_a.h/2 :
