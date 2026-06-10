@@ -66,3 +66,11 @@ class Button:
         """Change button text"""
         self.text = new_text
 
+
+class object:
+    def __init__(self,x,y,w,h,ax,ay,vx,vy,mass,):
+    
+
+    def apply_force:
+
+

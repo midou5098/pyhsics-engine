@@ -32,6 +32,7 @@ while True:
         if event.type==pygame.QUIT:
             pygame.quit()
             sys.exit()
+        menu.handle_event(event)
 
     menu.draw(screen)
     pygame.draw.rect(screen,black,xbox)
