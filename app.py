@@ -17,9 +17,13 @@ pygame.init()
 screen=pygame.display.set_mode((WINDOW_WIDTH,WINDOW_HEIGHT))
 pygame.display.set_caption("mohamed pyhsics engine")
 font=pygame.font.Font(None,36)
-beige=(245, 240, 225)
+beige=(200, 150, 120)
+essp=(80, 65, 55)
+esp_h=(10, 55, 80)
 green= (0, 255, 0)
-menu=Button(1150,50,100,50,"menu",beige,beige,)
+black= (0, 0, 0)
+xbox=pygame.Rect((50,320),(200,420))
+menu=Button(1150,50,100,50,"menu",essp,esp_h)
 
 
 while True:
@@ -30,6 +34,8 @@ while True:
             sys.exit()
 
     menu.draw(screen)
+    pygame.draw.rect(screen,black,xbox)
+    
     pygame.display.flip()
 
 
