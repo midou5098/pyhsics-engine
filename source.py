@@ -68,7 +68,7 @@ class Button:
 
 
 class object:
-    def __init__(self,x,y,w,h,mass,rest,fric,stat):
+    def __init__(self,x,y,w,h,mass,rest,fric,stat,color):
         self.x=x
         self.y=y
         self.w=w
@@ -81,7 +81,7 @@ class object:
         self.ay=0
         self.vx=0
         self.vy=0
-        self.black=pygame.Color('black')
+        self.color=color
     def appforce(self,fx,fy):
         if self.static :
             return
@@ -102,7 +102,7 @@ class object:
         self.x+=dt*self.vx
         self.y+=dt*self.vy
     def render(self,screen):
-        pygame.draw.rect(screen,self.black,(self.x,self.y,self.w,self.h))
+        pygame.draw.rect(screen,self.color,(self.x,self.y,self.w,self.h))
 
 #            tbh i ll use the axis aligned bounding box(aabb) we ll upgrade later
 class world:
