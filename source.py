@@ -144,8 +144,7 @@ class world:
                             nx=0
                             ny=-1  
                         self.cor=max(oy-0.01,0)*0.4
-
-
+                    vel_n=rvx*nx+rvy*ny
 
                     if obj_a.static:
                         inv_a=0
@@ -156,21 +155,24 @@ class world:
                     else:
                         inv_b=1/obj_b.mass
                     tot=inv_a+inv_b
+                    if vel_n<=0:
+                        j=-(1+min(obj_a.rest,obj_b.rest))* vel_n/tot
+                        obj_a.appimp(-j*nx,-j*ny)
+                        obj_b.appimp(j*nx,j*ny)
+
+
                     
                     
-                    obj_a.x+=-(inv_a/tot)*self.cor*nx
-                    obj_b.x+=-(inv_b/tot)*self.cor*nx
                     
-                    obj_a.y+=-(inv_a/tot)*self.cor*ny
-                    obj_b.y+=-(inv_b/tot)*self.cor*ny
+                    obj_a.x-=(inv_a/tot)*self.cor*nx
+                    obj_b.x+=(inv_b/tot)*self.cor*nx
+                    
+                    obj_a.y-=(inv_a/tot)*self.cor*ny
+                    obj_b.y+=(inv_b/tot)*self.cor*ny
                     
                     
                 
-                    vel_n=rvx*nx+rvy*ny
-                    if vel_n<=0:
-                        j=-(1+min(obj_a.rest,obj_b.rest))*vel_n/((1/obj_a.mass)+(1/obj_b.mass))
-                        obj_a.appimp(-j*nx,-j*ny)
-                        obj_b.appimp(j*nx,j*ny)
+                    
 
 
 
