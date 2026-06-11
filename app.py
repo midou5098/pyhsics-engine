@@ -38,6 +38,12 @@ while True:
         if event.type==pygame.QUIT:
             pygame.quit()
             sys.exit()
+        elif event.type==pygame.MOUSEBUTTONDOWN:
+            worldo.pick(*event.pos)
+        elif event.type==pygame.MOUSEBUTTONUP:
+            worldo.release()
+        elif event.type==pygame.MOUSEMOTION:
+            worldo.set_mouse(*event.pos)
         menu.handle_event(event)
 
 

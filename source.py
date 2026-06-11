@@ -120,6 +120,25 @@ class world:
         
     def addobj(self,obj):
         self.objects.append(obj)
+    def appdrag(self):
+        if not self.dragging or self.dragged==None:
+            return 
+        obj=self.dragged
+        targetx=self.mousex-self.offsetx
+        targety=self.mousey-self.offsety
+        dx=targetx-obj.x
+        dy=targety-obj.y
+        stiff=8000
+        dmp=400
+        fx=dx*stiff - obj.vx*dmp 
+        fy=dy*stiff - obj.vy*dmp
+        obj.appforce(fx,fy) 
+    
+    
+    
+    
+    
+    
     def update(self,dt):
         for obj in self.objects:
             obj.appforce(0,self.gravity*obj.mass)
@@ -190,9 +209,24 @@ class world:
         for obj in self.objects:
             if obj.static:
                 continue
-            if obj.x<=mx<=obj.x+obj.w:
+            if obj.x<=mx<=obj.x+obj.w and obj.y<=mx<=obj.y+obj.y:
                 self.dragging=True
                 self.dragged=obj
+                self.mx=mx
+                self.my=my
+                self.offsetx=obj.x-mx
+                self.offsety=obj.y-my
+                return obj
+        return None
+    
+    def set_mouse(self,mx,my):
+        if self.dragging:
+            self.mx=mx
+            self.my=my
+    def release(self):
+        self.dragging=False
+        self.dragged=None
+
             
 
         
