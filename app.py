@@ -27,9 +27,16 @@ worldo=world(15,screen,8)
 obji=object(100,50,100,100,1000,1,0.7,False,pygame.Color('red'))
 objii=object(100,200,100,100,1500,1,0.7,False,pygame.Color('blue'))
 floor=object(0,700,1280,720,1,0.5,0.5,True,pygame.Color('black'))
+ceil=object(0,-10,1280,20,1,0.5,0.5,True,pygame.Color('black'))
+lw=object(-10,0,20,720,1,0.5,0.5,True,pygame.Color('black'))
+rw=object(1270,0,20,720,1,0.5,0.5,True,pygame.Color('black'))
+
 worldo.addobj(obji)
 worldo.addobj(objii)
 worldo.addobj(floor)
+worldo.addobj(ceil)
+worldo.addobj(rw)
+worldo.addobj(lw)
 clock =pygame.time.Clock()
 while True:
     dt =clock.tick(60)/1000.0
