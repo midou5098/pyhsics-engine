@@ -1,13 +1,15 @@
 import pygame 
 import numpy as np
 import sys
+#import pygame_gui
 from source import Button,object,world
 
 WINDOW_WIDTH=1280
 WINDOW_HEIGHT=720
 
 
-
+# aint gon lie, i aint designing another input systemm with s1 s2 s3 etc, imma call another librarie 
+#nvmd shi needs a whole ahh refractor
 popped=False
 
 

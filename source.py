@@ -67,6 +67,33 @@ class Button:
         self.text = new_text
 
 
+
+
+
+
+
+class textzone:
+    def __init__(self,x,y,w,h):
+        self.x=x
+        self.y=y
+        self.w=w
+        self.h=h
+        self.clicked=False
+        self.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class object:
     def __init__(self,x,y,w,h,mass,rest,fric,stat,color):
         self.x=x
