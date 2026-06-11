@@ -111,6 +111,13 @@ class world:
         self.objects=list()
         self.sc=screen
         self.rest=rest
+        self.dragged=False
+        self.dragging=False
+        self.mx=0
+        self.my=0
+        self.offsetx=0
+        self.offsety=0
+        
     def addobj(self,obj):
         self.objects.append(obj)
     def update(self,dt):
@@ -179,4 +186,14 @@ class world:
     def render(self):
         for obj in self.objects:
             obj.render(self.sc)
+    def pick(self,mx,my):
+        for obj in self.objects:
+            if obj.static:
+                continue
+            if obj.x<=mx<=obj.x+obj.w:
+                self.dragging=True
+                self.dragged=obj
+            
+
+        
 
