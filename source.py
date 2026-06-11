@@ -124,8 +124,8 @@ class world:
         if not self.dragging or self.dragged==None:
             return 
         obj=self.dragged
-        targetx=self.mousex-self.offsetx
-        targety=self.mousey-self.offsety
+        targetx=self.mx-self.offsetx
+        targety=self.my-self.offsety
         dx=targetx-obj.x
         dy=targety-obj.y
         stiff=8000
@@ -142,6 +142,7 @@ class world:
     def update(self,dt):
         for obj in self.objects:
             obj.appforce(0,self.gravity*obj.mass)
+        self.appdrag()
         for obj in self.objects:
             obj.update(dt)
         for a in range(self.objects.__len__()):
@@ -209,7 +210,7 @@ class world:
         for obj in self.objects:
             if obj.static:
                 continue
-            if obj.x<=mx<=obj.x+obj.w and obj.y<=mx<=obj.y+obj.y:
+            if obj.x<=mx<=obj.x+obj.w and obj.y<=my<=obj.y+obj.y:
                 self.dragging=True
                 self.dragged=obj
                 self.mx=mx
