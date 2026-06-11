@@ -88,11 +88,12 @@ class textzone:
             if key==pygame.K_BACKSPACE:
                 self.text=self.text[:-1]
             else:
-                self.text+=key
-    def render(self,screen):
+                self.text+=key.unicode
+    def render(self,screen,font):
         zone =pygame.Rect(self.x,self.y,self.w,self.h)
         pygame.draw.rect(screen,pygame.Color('white'),zone)
-        screen.blit(self.text,(self.x+5,self.y+3))
+        txtr=font.render(self.text,True,pygame.Color('black'))
+        screen.blit(txtr,(self.x+5,self.y+10))
         
         
 

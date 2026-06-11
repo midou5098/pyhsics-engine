@@ -2,7 +2,7 @@ import pygame
 import numpy as np
 import sys
 #import pygame_gui
-from source import Button,object,world
+from source import Button,object,world,textzone
 
 WINDOW_WIDTH=1280
 WINDOW_HEIGHT=720
@@ -45,6 +45,12 @@ ceil=object(0,-10,1280,20,1,0.5,0.5,True,pygame.Color('black'))
 lw=object(-10,20,20,690,1,0.5,0.5,True,pygame.Color('black'))
 rw=object(1270,20,20,690,1,0.5,0.5,True,pygame.Color('black'))
 
+
+
+name=textzone(500,100,300,50)
+
+
+
 worldo.addobj(obji)
 worldo.addobj(objii)
 worldo.addobj(floor)
@@ -59,8 +65,11 @@ while True:
         if event.type==pygame.QUIT:
             pygame.quit()
             sys.exit()
+        elif event.type==pygame.KEYDOWN:
+            name.record(event)
         elif event.type==pygame.MOUSEBUTTONDOWN:
             worldo.pick(*event.pos)
+            name.focus(*event.pos)
 
 
         elif event.type==pygame.MOUSEBUTTONUP:
@@ -83,6 +92,7 @@ while True:
     if popped :
         screen.blit(board,(20,20))
         x.draw(screen)
+        name.render(screen,font)
     
     pygame.display.flip()
 
