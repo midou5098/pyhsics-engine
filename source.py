@@ -182,6 +182,8 @@ class world:
                     else:
                         inv_b=1/obj_b.mass
                     tot=inv_a+inv_b
+                    if tot==0:
+                        continue
                     if vel_n<=0:
                         j=-(1+min(obj_a.rest,obj_b.rest))* vel_n/tot
                         obj_a.appimp(-j*nx,-j*ny)

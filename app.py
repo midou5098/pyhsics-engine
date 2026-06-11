@@ -8,7 +8,7 @@ WINDOW_HEIGHT=720
 
 
 
-
+popped=False
 
 
 
@@ -24,12 +24,12 @@ green= (0, 255, 0)
 black= (0, 0, 0)
 menu=Button(1150,50,100,50,"menu",essp,esp_h)
 worldo=world(15,screen,8)
-obji=object(100,50,100,100,1000,1,0.7,False,pygame.Color('red'))
+obji=object(100,50,100,100,8000,1,0.7,False,pygame.Color('red'))
 objii=object(100,200,100,100,1500,1,0.7,False,pygame.Color('blue'))
 floor=object(0,700,1280,720,1,0.5,0.5,True,pygame.Color('black'))
 ceil=object(0,-10,1280,20,1,0.5,0.5,True,pygame.Color('black'))
-lw=object(-10,0,20,720,1,0.5,0.5,True,pygame.Color('black'))
-rw=object(1270,0,20,720,1,0.5,0.5,True,pygame.Color('black'))
+lw=object(-10,20,20,690,1,0.5,0.5,True,pygame.Color('black'))
+rw=object(1270,20,20,690,1,0.5,0.5,True,pygame.Color('black'))
 
 worldo.addobj(obji)
 worldo.addobj(objii)
@@ -57,6 +57,9 @@ while True:
     menu.draw(screen)
     worldo.update(dt)
     worldo.render()
+    menu.draw(screen)
+    if popped :
+        sbar.render(screen)
     
     pygame.display.flip()
 
