@@ -18,14 +18,12 @@ popped=False
 
 
 
-def animatepop(wy,pt,lt):
-    timer=clock.ticks(60)/1000.0
-    if timer>lt+1:
-        if pt=="l" and wy>800:
-            wy-=10
-        elif pt=="r" and wy <1300:
-            wy+=10
-        lt=timer
+def animatepop(wy,pt):
+    if pt=="l" and wy>800:
+        wy-=10
+    elif pt=="r" and wy <1300:
+        wy+=10
+    return wy
     
 
 
@@ -63,7 +61,7 @@ esp_h=(10, 55, 80)
 green= (0, 255, 0)
 black= (0, 0, 0)
 menu=Button(1150,50,100,50,"menu",essp,esp_h)
-x=Button(50,50,50,50,"X",essp,esp_h)
+x=Button(1200,50,50,50,"X",essp,esp_h)
 worldo=world(1000,screen,8)
 obji=object(100,50,100,100,8000,1,0.7,False,pygame.Color('red'))
 objii=object(100,200,100,100,1500,1,0.7,False,pygame.Color('blue'))
@@ -76,7 +74,7 @@ rw=object(1270,20,20,690,1,0.5,0.5,True,pygame.Color('black'))
 
 name=textzone(500,200,300,50)
 
-xt=800
+xt=1300
 
 worldo.addobj(obji)
 worldo.addobj(objii)
@@ -85,6 +83,8 @@ worldo.addobj(ceil)
 worldo.addobj(rw)
 worldo.addobj(lw)
 clock =pygame.time.Clock()
+right=False
+left=False
 while True:
     dt =clock.tick(60)/1000.0
     screen.fill(beige)
@@ -105,32 +105,37 @@ while True:
             worldo.set_mouse(*event.pos)
         menu.handle_event(event)
         if menu.clicked:
-            
-            left=True
+            if not popped and not right :
+                popped=True
+                left=True
+                right=False
+            menu.clicked=False
         if popped:
             x.handle_event(event)
-        if x.clicked:
-            popped=False
-            right=True
-
-
-
-
-
-
-
-
-
+            if x.clicked:
+                popped=False
+                right=True
+                left=False
+                x.clicked=False
+                
     menu.draw(screen)
     worldo.update(dt)
     worldo.render()
     menu.draw(screen)
-    if popped :
-        ltime=clock.tick(60)/1000.0
+    if popped or right:
         if left:
-            animatepop(xt,"l",ltime)
+            xt=animatepop(xt,"l")
         if right:
-            animatepop(xt,"r",ltime)
+            xt=animatepop(xt,"r")
+       
+    screen.blit(board,(xt,-100))
+    if (xt==800):
+        left=False
+        x.draw(screen) 
+    if (xt==1300):
+        right =False
+        popped=False
+        left=False
 
     
     pygame.display.flip()
