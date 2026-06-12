@@ -81,17 +81,20 @@ class textzone:
     def focus(self,mx,my):
         if self.x<=mx<=self.x+self.w and self.y<=my<=self.y+self.h:
             self.focused=True
+        else:
+            self.focused=False
     def record(self,key):
         if self.focused:
             if key.key==pygame.K_BACKSPACE:
                 self.text=self.text[:-1]
             else:
-                self.text+=key.unicode
+                if len(self.text)<10:
+                    self.text+=key.unicode
     def render(self,screen,font):
         zone =pygame.Rect(self.x,self.y,self.w,self.h)
         pygame.draw.rect(screen,pygame.Color('white'),zone)
         txtr=font.render(self.text,True,pygame.Color('black'))
-        screen.blit(txtr,(self.x+5,self.y+10))
+        screen.blit(txtr,(self.x+5,self.y+5))
     
         
         
@@ -110,7 +113,8 @@ class textzone:
 
 
 class object:
-    def __init__(self,x,y,w,h,mass,rest,fric,stat,color):
+    def __init__(self,x,y,w,h,mass,rest,fric,stat,color,name):
+        self.name=name
         self.x=x
         self.y=y
         self.w=w
