@@ -81,7 +81,6 @@ txtadd=font.render(add,True,pygame.Color('black'))
 txtname=font.render(name,True,pygame.Color('black'))
 txtmass=font.render(mass,True,pygame.Color('black'))
 txtcolor=font.render(color,True,pygame.Color('black'))
-
 worldo.addobj(obji)
 worldo.addobj(objii)
 worldo.addobj(floor)
@@ -108,6 +107,11 @@ while True:
             else:
                 bmode=1
                 ls=worldo.info(*event.pos)
+                if not popped and not opening and not closing  :
+                    popped=True
+                    opening=True
+                    closing=False
+
             namez.focus(*event.pos)
             massz.focus(*event.pos)
             colorz.focus(*event.pos)
@@ -130,6 +134,7 @@ while True:
                 worldo.addobj(obs)
         if menu.clicked:
             if not popped and not opening and not closing  :
+                bmode=0
                 popped=True
                 opening=True
                 closing=False
@@ -166,7 +171,12 @@ while True:
                 s=font.render(error,True,pygame.Color('black'))
                 screen.blit(s,(1000,600))
         else:
-
+            tx1=font.render("name :"+ls[0],True,pygame.Color('black'))
+            tx2=font.render("mass :"+ls[1],True,pygame.Color('black'))
+            tx3=font.render("color :"+ls[2],True,pygame.Color('black'))
+            screen.blit(tx1,(1010,150))
+            screen.blit(tx2,(1010,250))
+            screen.blit(tx3,(1010,350))
     if (xt==1300):
         closing=False
         popped=False

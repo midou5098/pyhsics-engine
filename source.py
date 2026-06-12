@@ -271,9 +271,10 @@ class world:
         ls=list()
         for obj in self.objects:
             if obj.x<=mx<=obj.x+obj.w and obj.y<=my<=obj.y+obj.h:
-                list.append(obj.name)
-                list.append(str(obj.mass)+" g")
-                list.append(str(obj.color))
+                ls.append(obj.name)
+                ls.append(str(obj.mass)+" g")
+                ls.append(str(obj.color))
+        return ls
 
     def set_mouse(self,mx,my):
         if self.dragging:
