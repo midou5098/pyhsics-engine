@@ -12,7 +12,10 @@ WINDOW_HEIGHT=720
 #nvmd shi needs a whole ahh refractor
 popped=False
 
-
+def namec(rgb):
+    for name,color in pygame.color.THECOLORS.items():
+        if color[:3] == rgb: 
+            return name
 
 
 
@@ -47,7 +50,7 @@ font=pygame.font.Font(None,26)
 board=pygame.image.load("window.png").convert_alpha()
 board=pygame.transform.scale(board,(640,920))
 
-
+ls=list()
 
 
 error=""
@@ -171,9 +174,10 @@ while True:
                 s=font.render(error,True,pygame.Color('black'))
                 screen.blit(s,(1000,600))
         else:
+            temp=namec(ls[2])
             tx1=font.render("name :"+ls[0],True,pygame.Color('black'))
             tx2=font.render("mass :"+ls[1],True,pygame.Color('black'))
-            tx3=font.render("color :"+ls[2],True,pygame.Color('black'))
+            tx3=font.render("color :"+temp,True,pygame.Color('black'))
             screen.blit(tx1,(1010,150))
             screen.blit(tx2,(1010,250))
             screen.blit(tx3,(1010,350))

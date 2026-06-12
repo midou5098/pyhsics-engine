@@ -273,7 +273,8 @@ class world:
             if obj.x<=mx<=obj.x+obj.w and obj.y<=my<=obj.y+obj.h:
                 ls.append(obj.name)
                 ls.append(str(obj.mass)+" g")
-                ls.append(str(obj.color))
+                if isinstance(obj.color, pygame.Color):
+                    ls.append((obj.color.r, obj.color.g, obj.color.b))
         return ls
 
     def set_mouse(self,mx,my):
