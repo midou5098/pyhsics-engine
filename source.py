@@ -21,13 +21,11 @@ class Button:
             print("Custom font not found, using default")
 
     def handle_event(self, event):
-        """Handle mouse events for the button"""
         if event.type == pygame.MOUSEMOTION:
-            # Check if mouse is hovering
             self.is_hovered = self.rect.collidepoint(event.pos)
 
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1 and self.is_hovered:  # Left click
+            if event.button == 1 and self.rect.collidepoint(event.pos):
                 self.clicked = True
                 return True
 
