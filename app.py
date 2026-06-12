@@ -15,6 +15,33 @@ popped=False
 
 
 
+
+
+
+def animatepop(wy,pt,lt):
+    timer=clock.ticks(60)/1000.0
+    if timer>lt+1:
+        if pt=="l" and wy>800:
+            wy-=10
+        elif pt=="r" and wy <1300:
+            wy+=10
+        lt=timer
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 pygame.init()
 screen=pygame.display.set_mode((WINDOW_WIDTH,WINDOW_HEIGHT))
 pygame.display.set_caption("mohamed pyhsics engine")
@@ -22,7 +49,7 @@ font=pygame.font.Font(None,36)
 
 
 board=pygame.image.load("window.png").convert_alpha()
-board=pygame.transform.scale(board,(1200,680))
+board=pygame.transform.scale(board,(640,920))
 
 
 
@@ -37,7 +64,7 @@ green= (0, 255, 0)
 black= (0, 0, 0)
 menu=Button(1150,50,100,50,"menu",essp,esp_h)
 x=Button(50,50,50,50,"X",essp,esp_h)
-worldo=world(15,screen,8)
+worldo=world(1000,screen,8)
 obji=object(100,50,100,100,8000,1,0.7,False,pygame.Color('red'))
 objii=object(100,200,100,100,1500,1,0.7,False,pygame.Color('blue'))
 floor=object(0,700,1280,720,1,0.5,0.5,True,pygame.Color('black'))
@@ -47,9 +74,9 @@ rw=object(1270,20,20,690,1,0.5,0.5,True,pygame.Color('black'))
 
 
 
-name=textzone(500,100,300,50)
+name=textzone(500,200,300,50)
 
-
+xt=800
 
 worldo.addobj(obji)
 worldo.addobj(objii)
@@ -78,11 +105,20 @@ while True:
             worldo.set_mouse(*event.pos)
         menu.handle_event(event)
         if menu.clicked:
-            popped=True
+            
+            left=True
         if popped:
             x.handle_event(event)
         if x.clicked:
             popped=False
+            right=True
+
+
+
+
+
+
+
 
 
     menu.draw(screen)
@@ -90,11 +126,20 @@ while True:
     worldo.render()
     menu.draw(screen)
     if popped :
-        screen.blit(board,(20,20))
-        x.draw(screen)
-        name.render(screen,font)
+        ltime=clock.tick(60)/1000.0
+        if left:
+            animatepop(xt,"l",ltime)
+        if right:
+            animatepop(xt,"r",ltime)
+
     
     pygame.display.flip()
+
+
+
+
+
+
 
 
 

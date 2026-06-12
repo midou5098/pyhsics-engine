@@ -85,7 +85,7 @@ class textzone:
             self.focused=True
     def record(self,key):
         if self.focused:
-            if key==pygame.K_BACKSPACE:
+            if key.key==pygame.K_BACKSPACE:
                 self.text=self.text[:-1]
             else:
                 self.text+=key.unicode
@@ -94,6 +94,7 @@ class textzone:
         pygame.draw.rect(screen,pygame.Color('white'),zone)
         txtr=font.render(self.text,True,pygame.Color('black'))
         screen.blit(txtr,(self.x+5,self.y+10))
+    
         
         
 
