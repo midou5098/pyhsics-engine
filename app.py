@@ -70,11 +70,19 @@ ceil=object(0,-10,1280,20,1,0.5,0.5,True,pygame.Color('black'))
 lw=object(-10,20,20,690,1,0.5,0.5,True,pygame.Color('black'))
 rw=object(1270,20,20,690,1,0.5,0.5,True,pygame.Color('black'))
 
-button
 
-name=textzone(500,200,300,50)
-
+namez=textzone(1100,245,120,30)
+massz=textzone(1100,300,120,30)
+colorz=textzone(1100,350,12hjk0,30)
+add="<- adding object ->"
+name="name :"
+mass="mass :"
+color="color :"
 xt=1300
+txtadd=font.render(add,True,pygame.Color('black'))
+txtname=font.render(name,True,pygame.Color('black'))
+txtmass=font.render(mass,True,pygame.Color('black'))
+txtcolor=font.render(color,True,pygame.Color('black'))
 
 worldo.addobj(obji)
 worldo.addobj(objii)
@@ -96,7 +104,8 @@ while True:
             name.record(event)
         elif event.type==pygame.MOUSEBUTTONDOWN:
             worldo.pick(*event.pos)
-            name.focus(*event.pos)
+            namez.focus(*event.pos)
+            massz.focus(*event.pos)
 
 
         elif event.type==pygame.MOUSEBUTTONUP:
@@ -128,7 +137,14 @@ while True:
     screen.blit(board,(xt,-100))
     if (xt==800):
         opening=False
-        x.draw(screen) 
+        x.draw(screen)
+        screen.blit(txtadd,(1010,150))
+        namez.render(screen,font)
+        massz.render(screen,font)
+        colorz.render(screen,font)
+        screen.blit(txtname,(1000,250))
+        screen.blit(txtmass,(1000,300))
+        screen.blit(txtcolor,(1000,350))
     if (xt==1300):
         closing=False
         popped=False
