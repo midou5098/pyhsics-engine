@@ -258,7 +258,7 @@ class world:
         for obj in self.objects:
             if obj.static:
                 continue
-            if obj.x<=mx<=obj.x+obj.w and obj.y<=my<=obj.y+obj.y:
+            if obj.x<=mx<=obj.x+obj.w and obj.y<=my<=obj.y+obj.h:
                 self.dragging=True
                 self.dragged=obj
                 self.mx=mx

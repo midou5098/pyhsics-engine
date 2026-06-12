@@ -105,7 +105,8 @@ while True:
             massz.record(event)
             colorz.record(event)
         elif event.type==pygame.MOUSEBUTTONDOWN:
-            worldo.pick(*event.pos)
+            if event.button==1:
+                worldo.pick(*event.pos)
             namez.focus(*event.pos)
             massz.focus(*event.pos)
             colorz.focus(*event.pos)
