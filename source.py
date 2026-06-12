@@ -267,7 +267,14 @@ class world:
                 self.offsety=obj.y-my
                 return obj
         return None
-    
+    def info(self,mx,my):
+        ls=list()
+        for obj in self.objects:
+            if obj.x<=mx<=obj.x+obj.w and obj.y<=my<=obj.y+obj.h:
+                list.append(obj.name)
+                list.append(str(obj.mass)+" g")
+                list.append(str(obj.color))
+
     def set_mouse(self,mx,my):
         if self.dragging:
             self.mx=mx

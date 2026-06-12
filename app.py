@@ -16,8 +16,6 @@ popped=False
 
 
 
-
-
 def animatepop(wy,opening,closing ):
     if opening  and wy>800:
         wy-=10
@@ -27,7 +25,7 @@ def animatepop(wy,opening,closing ):
     
 
 
-
+bmode=0
 
 
 
@@ -107,6 +105,9 @@ while True:
         elif event.type==pygame.MOUSEBUTTONDOWN:
             if event.button==1:
                 worldo.pick(*event.pos)
+            else:
+                bmode=1
+                ls=worldo.info(*event.pos)
             namez.focus(*event.pos)
             massz.focus(*event.pos)
             colorz.focus(*event.pos)
@@ -152,17 +153,19 @@ while True:
     if (xt==800):
         opening=False
         x.draw(screen)
-        screen.blit(txtadd,(1010,150))
-        namez.render(screen,font)
-        massz.render(screen,font)
-        colorz.render(screen,font)
-        screen.blit(txtname,(1000,250))
-        screen.blit(txtmass,(1000,300))
-        screen.blit(txtcolor,(1000,350))
-        addb.draw(screen)
-        if error!="":
-            s=font.render(error,True,pygame.Color('black'))
-            screen.blit(s,(1000,600))
+        if bmode==0:
+            screen.blit(txtadd,(1010,150))
+            namez.render(screen,font)
+            massz.render(screen,font)
+            colorz.render(screen,font)
+            screen.blit(txtname,(1000,250))
+            screen.blit(txtmass,(1000,300))
+            screen.blit(txtcolor,(1000,350))
+            addb.draw(screen)
+            if error!="":
+                s=font.render(error,True,pygame.Color('black'))
+                screen.blit(s,(1000,600))
+        else:
 
     if (xt==1300):
         closing=False
