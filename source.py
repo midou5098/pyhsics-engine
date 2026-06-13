@@ -129,6 +129,7 @@ class object:
         self.vx=0
         self.vy=0
         self.color=color
+        self.new=False
     def appforce(self,fx,fy):
         if self.static :
             return
@@ -189,8 +190,12 @@ class world:
         fx=dx*stiff - obj.vx*dmp 
         fy=dy*stiff - obj.vy*dmp
         obj.appforce(fx,fy) 
-    
-    
+    def write(self):
+        for obj in self.objects:
+            if obj.new:
+                self.cur.execute("INSERT INTO objects (name, mass,color) VALUES (?, ?,?)", (obj.name, obj.mass,obj.color))
+                self.db.commit()
+                    
     
     
     

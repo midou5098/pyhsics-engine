@@ -136,6 +136,7 @@ while True:
                 error="not a pygame color!"
             else:
                 obs=object(100,100,100,100,int(massz.text),0.7,0.7,False,colorz.text,namez.text)
+                obs.new=True
                 worldo.addobj(obs)
         if menu.clicked:
             if not popped and not opening and not closing  :
