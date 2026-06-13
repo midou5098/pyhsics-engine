@@ -165,7 +165,7 @@ class world:
         self.my=0
         self.offsetx=0
         self.offsety=0
-        self.db=sqlite3.connect("objects.db")
+        self.db=sqlite3.connect("/home/bro/my-creations/pyhsics-engine/database/data.db")
         self.cur=self.db.cursor()
         self.db.commit()
 
@@ -195,6 +195,7 @@ class world:
             if obj.new:
                 self.cur.execute("INSERT INTO objects (name, mass,color) VALUES (?, ?,?)", (obj.name, obj.mass,obj.color))
                 self.db.commit()
+                obj.new=False
                     
     
     

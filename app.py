@@ -95,6 +95,8 @@ worldo.addobj(lw)
 clock =pygame.time.Clock()
 opening =False
 closing =False
+worldo.load()
+
 while True:
     dt =clock.tick(60)/1000.0
     screen.fill(beige)
@@ -191,7 +193,7 @@ while True:
 
     
     pygame.display.flip()
-
+    worldo.write()
 
 
 
