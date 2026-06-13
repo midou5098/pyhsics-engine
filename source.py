@@ -169,7 +169,7 @@ class world:
         self.cur=self.db.cursor()
         self.db.commit()
 
-    def load(self):
+    def load(self): =
         self.cur.execute("SELECT * FROM objects")
         rows=self.cur.fetchall()
         for row in rows:
