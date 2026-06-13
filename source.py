@@ -1,6 +1,7 @@
 import pygame
 import numpy as np
 import time
+import sqlite3
 #disclaimer : this button set is ai generated , got bigger fish to fry than designing a button class for 5 hours..
 class Button:
     def __init__(self, x, y, width, height, text, color, hover_color, text_color=pygame.Color('white')):
@@ -163,6 +164,7 @@ class world:
         self.my=0
         self.offsetx=0
         self.offsety=0
+    def load(self):
         
     def addobj(self,obj):
         self.objects.append(obj)
