@@ -169,11 +169,11 @@ class world:
         self.cur=self.db.cursor()
         self.db.commit()
 
-    def load(self): =
+    def load(self):
         self.cur.execute("SELECT * FROM objects")
         rows=self.cur.fetchall()
         for row in rows:
-            temp=object(100,100,100,100,row[1],0.7,0.7,False,row[2],[0])
+            temp=object(100,100,100,100,row[1],0.7,0.7,False,row[2],row[0])
             self.addobj(temp)
     def addobj(self,obj):
         self.objects.append(obj)
@@ -289,8 +289,8 @@ class world:
             if obj.x<=mx<=obj.x+obj.w and obj.y<=my<=obj.y+obj.h:
                 ls.append(obj.name)
                 ls.append(str(obj.mass)+" g")
-                if isinstance(obj.color, pygame.Color):
-                    ls.append((obj.color.r, obj.color.g, obj.color.b))
+                c=pygame.Color(obj.color) if not isinstance(obj.color,pygame.Color) else obj.color
+                ls.append((c.r, c.g, c.b))
         return ls
 
     def set_mouse(self,mx,my):
