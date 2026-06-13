@@ -164,8 +164,16 @@ class world:
         self.my=0
         self.offsetx=0
         self.offsety=0
+        self.db=sqlite3.connect("objects.db")
+        self.cur=self.db.cursor()
+        self.db.commit()
+
     def load(self):
-        
+        self.cur.execute("SELECT * FROM objects")
+        rows=self.cur.fetchall()
+        for row in rows:
+            temp=object(100,100,100,100,row[1],0.7,0.7,False,row[2],[0])
+            self.addobj(temp)
     def addobj(self,obj):
         self.objects.append(obj)
     def appdrag(self):
